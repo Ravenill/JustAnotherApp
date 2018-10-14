@@ -7,16 +7,18 @@ import java.util.List;
 public class PrinterService {
 
     public void print(List<Order> orders) {
-        for (Order order : orders) {
-            System.out.printf(order.toString());
-        }
+        orders.forEach(order -> System.out.printf(order.toString()));
     }
 
     public void print(int amount) {
-        System.out.printf(String.valueOf(amount));
+        System.out.printf("Amount of orders: " + String.valueOf(amount) + "\n");
     }
 
-    public void print(double cost) {
-        System.out.printf(String.valueOf(cost));
+    public void printCost(double cost) {
+        System.out.printf("Cost of items: " + String.valueOf(cost) + "\n");
+    }
+
+    public void printAverageCost(double averageCost) {
+        System.out.printf("Average cost of items: " + String.valueOf(averageCost) + "\n");
     }
 }

@@ -30,6 +30,7 @@ public class Application {
     }
 
     private void loadOrders(String[] filesNames) {
+        orderService.startLoading();
         orderService.saveOrdersInBase(fileService.decodeToOrderList(filesNames));
     }
 
@@ -37,19 +38,20 @@ public class Application {
         menuService.showMenu();
     }
 
-    private Integer getClientID() {
+    private String getClientID() {
         try {
             return menuService.getClientID();
         } catch (ExitTypeException e) {
             running = false;
+            orderService.stopTransferOrders();
             return null;
         } catch (NoIDException e) {
             e.printStackTrace();
-            return null;
+            return getClientID();
         }
     }
 
-    private void proceedOrders(Integer clientID) {
+    private void proceedOrders(String clientID) {
         if (running) {
             orderService.proceedOrders(clientID);
         }
